@@ -18,17 +18,21 @@
 
 ### Introduction
 
-`buku` is a powerful bookmark manager written in Python3 and SQLite3. When I started writing it, I couldn't find a flexible command-line solution with a private, portable, merge-able database along with seamless GUI integration. Hence, `buku` (after my son's nickname, meaning *close to the heart* in my language).
+`buku` is a powerful bookmark manager and a personal textual mini-web.
 
 For those who prefer the GUI, [bukuserver](https://github.com/jarun/buku/tree/master/bukuserver#readme) exposes a browsable front-end on a local web host server.
 
-`buku` can auto-import bookmarks from your browser(s) or fetch the title and description of a bookmarked url from the web. You can use your favourite editor to compose and update bookmarks. With multiple search options, including regex and a deep scan mode (particularly for URLs), it can find any bookmark instantly. `buku` can look up the latest snapshot of a broken link on the Wayback Machine. There's an Easter egg to revisit random forgotten bookmarks too! *Buku* is too busy to track you: no hidden history, obsolete records, usage analytics or homing.
+When I started writing it, I couldn't find a flexible command-line solution with a private, portable, merge-able database along with seamless GUI integration. Hence, `buku` (after my son's nickname, meaning *close to the heart* in my language).
 
-To get started right away, jump to the [Quickstart](#quickstart) section. We have one of the best documentation around. You'll find handy examples in the man page too. For more details, please refer to the wiki page on [operational notes](https://github.com/jarun/buku/wiki/Operational-notes).
+`buku` can auto-import bookmarks from your browser(s) or fetch the title, tags and description of a bookmarked URL from the web. Use your favourite editor to add, compose and update bookmarks. Search bookmarks instantly with multiple search options, including regex and a deep scan mode (particularly for URLs).
 
-There are several [projects based on `buku`](#related-projects), including a browser plug-in.
+Look up a broken link on the Wayback Machine. There's an Easter Egg to revisit random forgotten bookmarks too!
 
-*Love smart and efficient utilities? Explore [my repositories](https://github.com/jarun?tab=repositories). Buy me a cup of coffee if they help you.*
+There's no tracking, hidden history, obsolete records, usage analytics or homing.
+
+To get started right away, jump to the [Quickstart](#quickstart) section. We have one of the best documentation around. You'll find handy examples in the man page too. For internal details, please refer to the [operational notes](https://github.com/jarun/buku/wiki/Operational-notes).
+
+There are several [related projects](#related-projects), including a browser plug-in.
 
 <p align="center">
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RMLTQ76JSXJ4Q"><img src="https://img.shields.io/badge/donate-@PayPal-1eb0fc.svg" alt="Donate via PayPal!" /></a>
@@ -80,12 +84,12 @@ There are several [projects based on `buku`](#related-projects), including a bro
 
 | Feature | Dependency |
 | --- | --- |
-| Scripting language | Python 3.6+ |
+| Lang, SQLite | Python 3.6+ |
 | HTTPS | certifi, urllib3 |
 | Encryption | cryptography |
 | HTML | beautifulsoup4, html5lib |
 
-To copy url to clipboard at the prompt `buku` uses `xsel` (or `xclip`) on Linux, `pbcopy` (default installed) on OS X, `clip` (default installed) on Windows, `termux-clipboard` on Termux (terminal emulation for Android), `wl-copy` on Wayland. If X11 is missing, GNU Screen or tmux copy-paste buffers are recognized.
+To copy URL to clipboard `buku` uses `xsel` (or `xclip`) on Linux, `pbcopy` (default installed) on OS X, `clip` (default installed) on Windows, `termux-clipboard` on Termux (terminal emulation for Android), `wl-copy` on Wayland. If X11 is missing, GNU Screen or tmux copy-paste buffers are recognized.
 
 #### From a package manager
 
@@ -165,9 +169,10 @@ GENERAL OPTIONS:
                            - update results when used with search
                            - otherwise refresh all titles and desc
       -w, --write [editor|index]
-                           open editor to edit a fresh bookmark
+                           edit and add a new bookmark in editor
+                           else, edit bookmark at index in EDITOR
                            edit last bookmark, if index=-1
-                           to specify index, EDITOR must be set
+                           if no args, edit new bookmark in EDITOR
       -d, --delete [...]   remove bookmarks from DB
                            accepts indices or a single range
                            if no arguments:
@@ -272,7 +277,7 @@ PROMPT KEYS:
     o id|range [...]       browse bookmarks by indices and/or ranges
     p id|range [...]       print bookmarks by indices and/or ranges
     w [editor|id]          edit and add or update a bookmark
-    c id                   copy url at search result index to clipboard
+    c id                   copy URL at search result index to clipboard
     ?                      show this help
     q, ^D, double Enter    exit buku
 ```
@@ -329,7 +334,7 @@ PROMPT KEYS:
        > https://ddg.gg
        + Alternative search engine with perks
        # privacy,search engine
-    where, >: url, +: comment, #: tags
+    where, >: URL, +: comment, #: tags
 3. **Add** a bookmark with tags `search engine` & `privacy` and **immutable custom title** `DDG`:
 
        $ buku -a https://ddg.gg search engine, privacy --title 'DDG' --immutable 1
