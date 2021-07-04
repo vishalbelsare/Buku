@@ -4186,19 +4186,16 @@ def copy_to_clipboard(content):
         copier_params = ['clip']
 
     if copier_params:
-        Popen(copier_params, stdin=PIPE, stdout=DEVNULL, stderr=DEVNULL).communicate(content)
+        with Popen(copier_params, stdin=PIPE, stdout=DEVNULL, stderr=DEVNULL) as p:
+            p.communicate(content)
         return
 
     # If native clipboard utilities are absent, try to use terminal multiplexers
     # tmux
     if os.getenv('TMUX_PANE'):
         copier_params = ['tmux', 'set-buffer']
-        Popen(
-            copier_params + [content],
-            stdin=DEVNULL,
-            stdout=DEVNULL,
-            stderr=DEVNULL
-        ).communicate()
+        with Popen(copier_params + [content], stdin=DEVNULL, stdout=DEVNULL, stderr=DEVNULL) as p:
+            p.communicate()
         print('URL copied to tmux buffer.')
         return
 
@@ -4210,7 +4207,8 @@ def copy_to_clipboard(content):
             with os.fdopen(tmpfd, 'wb') as fp:
                 fp.write(content)
             copier_params.append(tmppath)
-            Popen(copier_params, stdin=DEVNULL, stdout=DEVNULL, stderr=DEVNULL).communicate()
+            with Popen(copier_params, stdin=DEVNULL, stdout=DEVNULL, stderr=DEVNULL) as p:
+                p.communicate()
         finally:
             os.unlink(tmppath)
         return
