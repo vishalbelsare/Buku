@@ -22,13 +22,18 @@
 
 For those who prefer the GUI, [bukuserver](https://github.com/jarun/buku/tree/master/bukuserver#readme) exposes a browsable front-end on a local web host server.
 
-When I started writing it, I couldn't find a flexible command-line solution with a private, portable, merge-able database along with seamless GUI integration. Hence, `buku`.
+When I started writing it, I couldn't find a flexible command-line solution with a private, portable, merge-able database along with seamless GUI integration. Hence, `buku` (after my son's nickname, meaning *close to the heart* in my language).
 
-`buku` can import bookmarks from browser(s) or fetch the title, tags and description of a URL from the web. Use your favourite editor to add, compose and update bookmarks. Search bookmarks instantly with multiple search options, including regex and a deep scan mode (handy with URLs).
+`buku` can auto-import bookmarks from your browser(s) or fetch the title, tags and description of a bookmarked URL from the web. Use your favourite editor to add, compose and update bookmarks. Search bookmarks instantly with multiple search options, including regex and a deep scan mode (particularly for URLs).
 
-It can look up broken links on Wayback Machine. There's an Easter Egg to revisit random bookmarks.
+Look up a broken link on the Wayback Machine. There's an Easter Egg to revisit random forgotten bookmarks too!
 
 There's no tracking, hidden history, obsolete records, usage analytics or homing.
+
+To get started right away, jump to the [Quickstart](#quickstart) section. We have one of the best documentation around. You'll find handy examples in the man page too. For internal details, please refer to the [operational notes](https://github.com/jarun/buku/wiki/Operational-notes).
+
+There are several [related projects](#related-projects), including a browser plug-in.
+
 
 To get started right away, jump to the [Quickstart](#quickstart) section. `buku` has one of the best documentation around. The man page comes with examples. For internal details, please refer to the [operational notes](https://github.com/jarun/buku/wiki/Operational-notes).
 
